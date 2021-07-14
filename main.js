@@ -75,7 +75,7 @@ spinButton.addEventListener('click', () => {
     const arrow = document.getElementById('arrow');
 
     let velocity = (Math.random() * 25) + 25;
-    let rotation = 0;
+    let rotation = Math.random(0, 360);
     let time = performance.now();
     const animStep = () => {
         const now = performance.now();
