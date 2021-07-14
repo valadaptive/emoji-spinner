@@ -1,0 +1,27 @@
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #eee;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+#spinner-wrapper {
+    flex: 0 1 auto;
+    overflow: auto;
+}
+
+#spinner {
+    display: block;
+}
+
+#arrow {
+    transform-box: fill-box;
+    transform-origin: center;
+}
