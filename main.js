@@ -21,14 +21,15 @@ const updateSpinner = () => {
         folder: 'svg',
         ext: '.svg'
     });
-    const numEmojis = shim.querySelectorAll('img').length;
+    const emojiElems = shim.querySelectorAll('img');
+    const numEmojis = emojiElems.length;
     const halfSectorAngle = Math.PI / numEmojis;
     const inscribedRadius = (radius - inset) * (Math.sin(halfSectorAngle) / (1 + Math.sin(halfSectorAngle)));
     const imageSize = inscribedRadius * 1.5;
     const interp = ((radius - inset) - inscribedRadius) / (radius - inset);
-    const emojis = Array.from(shim.querySelectorAll('img'))
-        .map((img, i, arr) => {
-            const angle = ((i + 0.5) / arr.length) * Math.PI * 2;
+    const emojis = Array.from(emojiElems)
+        .map((img, i) => {
+            const angle = ((i + 0.5) / numEmojis) * Math.PI * 2;
             return svg`<image
                 href=${img.src}
                 width=${imageSize}
@@ -51,7 +52,7 @@ const updateSpinner = () => {
             <circle cx=${radius} cy=${radius} r=${radius-inset} fill="white" stroke="black" />
             ${
                 emojis.map((_, i) => {
-                    const angle = (i / emojis.length) * Math.PI * 2;
+                    const angle = (i / numEmojis) * Math.PI * 2;
                     return svg`<line x1=${(Math.sin(angle) + 1) * (radius-inset) + inset} x2=${radius} y1=${(Math.cos(angle) + 1) * (radius-inset) + inset} y2=${radius} stroke-width="1" stroke="black" stroke-linecap="round" />`;
                 })
             }
