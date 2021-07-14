@@ -22,8 +22,10 @@ const updateSpinner = () => {
         ext: '.svg'
     });
     const numEmojis = shim.querySelectorAll('img').length;
-    const imageSize = ((Math.PI * radius) / numEmojis) / 3;
-    const interp = 0.5;
+    const halfSectorAngle = Math.PI / numEmojis;
+    const inscribedRadius = (radius - inset) * (Math.sin(halfSectorAngle) / (1 + Math.sin(halfSectorAngle)));
+    const imageSize = inscribedRadius * 1.5;
+    const interp = ((radius - inset) - inscribedRadius) / (radius - inset);
     const emojis = Array.from(shim.querySelectorAll('img'))
         .map((img, i, arr) => {
             const angle = ((i + 0.5) / arr.length) * Math.PI * 2;
