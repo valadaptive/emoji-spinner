@@ -12,7 +12,6 @@ const svg = htm.bind((type, props, ...children) => {
 const updateSpinner = () => {
     const radius = 50;
     const inset = 8;
-    const arrowHeight = 25;
 
     const {value} = emojiTextbox;
     const shim = document.createElement('span');
@@ -26,6 +25,7 @@ const updateSpinner = () => {
     const halfSectorAngle = Math.PI / numEmojis;
     const inscribedRadius = (radius - inset) * (Math.sin(halfSectorAngle) / (1 + Math.sin(halfSectorAngle)));
     const imageSize = inscribedRadius * 1.5;
+    const arrowHeight = Math.max(25, (radius - inset - inscribedRadius - (imageSize / 2)) * 2 - 3);
     const interp = ((radius - inset) - inscribedRadius) / (radius - inset);
     const emojis = Array.from(emojiElems)
         .map((img, i) => {
