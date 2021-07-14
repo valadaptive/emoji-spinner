@@ -5,7 +5,6 @@ const svg = htm.bind((type, props, ...children) => {
     if (props) for (const [prop, val] of Object.entries(props)) {
         elem.setAttribute(prop, val);
     }
-    console.log(children);
     elem.append(...children.flat().filter(a=>a));
     return elem;
 });
@@ -36,7 +35,6 @@ const updateSpinner = () => {
                 y=${(Math.cos(angle) + 1) * ((radius - inset) * interp) - (imageSize / 2) + (((radius * (1 - interp)) + (inset * interp)))}
             />`;
         });
-    console.log(emojis);
     const spinnerSvg = svg`
         <svg id="spinner" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
         <defs>
@@ -52,7 +50,6 @@ const updateSpinner = () => {
             ${
                 emojis.map((_, i) => {
                     const angle = (i / emojis.length) * Math.PI * 2;
-                    console.log(angle);
                     return svg`<line x1=${(Math.sin(angle) + 1) * (radius-inset) + inset} x2=${radius} y1=${(Math.cos(angle) + 1) * (radius-inset) + inset} y2=${radius} stroke-width="1" stroke="black" stroke-linecap="round" />`;
                 })
             }
@@ -81,7 +78,6 @@ spinButton.addEventListener('click', () => {
         const now = performance.now();
         const frametime = now - time;
         time = now;
-        console.log(frametime);
         rotation += velocity * (frametime / 16);
         velocity *= 0.95 ** (frametime / 16);
         arrow.style.transform = `rotate(${rotation}deg)`;
